@@ -1,6 +1,22 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Starfield extends PApplet {
+
 Particle [] bob;
 
-void setup()
+public void setup()
 {
   size(500,500);
   background(0);
@@ -18,7 +34,7 @@ void setup()
     }
 }
 
-void draw()
+public void draw()
 {
   for(int nI=0; nI<bob.length-1;nI++)
   {
@@ -56,7 +72,7 @@ class NormalParticle implements Particle
   {
     dX = Math.cos(dTheta)*dSpeed + dX;
     dY = Math.sin(dTheta)*dSpeed +dY;
-    dTheta = dTheta + .1;
+    dTheta = dTheta + .1f;
   }
 }
 
@@ -84,11 +100,11 @@ class OddballParticle implements Particle
   {
     eX = Math.cos(eTheta)*eSpeed + eX;
     eY = Math.sin(eTheta)*eSpeed + eY;
-    eTheta = eTheta + .1;
+    eTheta = eTheta + .1f;
   }
 }
 
-void mousePressed()
+public void mousePressed()
 {
   background((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
   bob = new Particle[75];
@@ -106,5 +122,14 @@ void mousePressed()
   {
     bob[nI].move();
     bob[nI].show();
+  }
+}
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Starfield" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
   }
 }
