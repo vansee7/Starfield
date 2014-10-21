@@ -11,6 +11,7 @@ void setup()
       bob[nI] = new NormalParticle();
     }
   bob[5] = new OddballParticle();
+  bob[4] = new JumboParticle();
   for(int nI=0;nI < 10; nI++)
     {
       bob[nI].show();
@@ -35,7 +36,7 @@ interface Particle
 
 class NormalParticle implements Particle
 {
-  double dX, dY, dTheta, dSpeed;
+  double dX, dY, dTheta, dSpeed, dSize;
 
   NormalParticle()
   {
@@ -43,13 +44,14 @@ class NormalParticle implements Particle
     dY = 250;
     dTheta = Math.PI*2*Math.random();
     dSpeed = Math.random()*10;
+    dSize = 10;
   }
 
   public void show()
   {
     noStroke();
     fill((int)(Math.random()*256), (int)(Math.random()*256), (int)(Math.random()*256));
-    ellipse((float)dX,(float)dY,10,10);
+    ellipse((float)dX,(float)dY,(float)dSize,(float)dSize);
   }
 
   public void move()
@@ -60,10 +62,9 @@ class NormalParticle implements Particle
   }
 }
 
-
 class OddballParticle implements Particle
 {
-  double eX, eY, eTheta, eSpeed;
+  double eX, eY, eTheta, eSpeed, eSize;
 
   OddballParticle()
   {
@@ -71,13 +72,14 @@ class OddballParticle implements Particle
     eY = 250;
     eTheta = Math.PI*2*Math.random();
     eSpeed = Math.random()*5;
+    eSize = 30;
   }
 
   public void show()
   {
     noStroke();
     fill(255);
-    ellipse((float)eX,(float)eY,30,30);
+    ellipse((float)eX,(float)eY,(float)eSize,(float)eSize);
   }
 
   public void move()
@@ -88,6 +90,22 @@ class OddballParticle implements Particle
   }
 }
 
+class JumboParticle extends NormalParticle
+{
+	JumboParticle()
+	{
+		dSize = 50;
+	}
+
+	public void show()
+    {
+    	noStroke();
+    	fill(255);
+    	ellipse((float)dX,(float)dY,(float)dSize,(float)dSize);
+    }
+}
+
+
 void mousePressed()
 {
   background((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
@@ -97,6 +115,7 @@ void mousePressed()
       bob[nI] = new NormalParticle();
     }
     bob[5] = new OddballParticle();
+    bob[4] = new JumboParticle();
   for(int nI=0;nI < 10; nI++)
     {
       bob[nI].show();
